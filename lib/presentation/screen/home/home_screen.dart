@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:movie_app/core/util/date_time_formatter_util.dart';
 import 'package:movie_app/data/model/daily_box_office_model.dart';
 import 'package:movie_app/presentation/layout/default_layout.dart';
 import 'package:movie_app/presentation/screen/home/state/home_screen_state.dart';
@@ -12,6 +13,7 @@ class HomeScreen extends ConsumerWidget with HomeScreenState {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final DateTime targetDt = DateTime.now().subtract(const Duration(days: 1));
     return DefaultLayout(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 12),
@@ -39,7 +41,9 @@ class HomeScreen extends ConsumerWidget with HomeScreenState {
                 onPressed: () {
                   ref.read(dailyBoxOfficeProvider.notifier).fetchDailyBoxOffice(
                         dailyBoxOfficeRequestModel: DailyBoxOfficeRequestModel(
-                          targetDt: '20240313',
+                          targetDt: DateTimeFormatterUtil.formatDateYYYYMMDD(
+                            targetDt,
+                          ),
                         ),
                       );
                 },

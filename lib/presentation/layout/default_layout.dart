@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app/config/theme/color.dart';
 
 class DefaultLayout extends StatelessWidget {
   final Widget child;
@@ -7,7 +8,10 @@ class DefaultLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(child: child),
+      backgroundColor: ColorTheme.backgroundColor,
+      body: SafeArea(
+        child: child,
+      ),
     );
   }
 }

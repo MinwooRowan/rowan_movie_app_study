@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app/core/util/date_time_formatter_util.dart';
 import 'package:movie_app/data/model/daily_box_office_model.dart';
 
 class MovieListViewWidget extends StatelessWidget {
@@ -11,7 +12,8 @@ class MovieListViewWidget extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text('Title :  ${dailyBoxOfficeData.boxofficeType}'),
+          Text(
+              '${DateTimeFormatterUtil.formatDateWithKorean(DateTime.now().subtract(const Duration(days: 1)))} 박스 오피스'),
           const SizedBox(height: 20),
           Expanded(
             child: ListView.separated(
@@ -45,9 +47,17 @@ class _MovieInfoWidget extends StatelessWidget {
         children: [
           Text(movie.movieNm ?? ''),
           const SizedBox(width: 10),
-          Text(
-            movie.openDt ?? '',
-            maxLines: 2,
+          Row(
+            children: [
+              Text(
+                '개봉일 : ${movie.openDt} ',
+                maxLines: 2,
+              ),
+              Text(
+                '일일 관객수 : ${movie.audiCnt}',
+                maxLines: 2,
+              ),
+            ],
           ),
         ],
       ),

@@ -8,7 +8,10 @@ part 'dio.g.dart';
 
 @Riverpod(keepAlive: true)
 Dio dio(DioRef ref) {
-  final Dio dio = Dio();
+  final Dio dio = Dio(BaseOptions(
+    connectTimeout: const Duration(milliseconds: 5000),
+    receiveTimeout: const Duration(milliseconds: 5000),
+  ));
   dio.interceptors.add(CustomInterceptor(ref: ref));
   return dio;
 }
